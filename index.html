@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Métodos Numéricos-U3</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		body { 
+			background-color: darkslategrey;
+		}
+		h1, label, td {
+			color: floralwhite;
+		}
+		.res {
+			color: thistle;
+		}
+		th {
+			color: salmon;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<h1>Programa Prueba</h1>
+		<hr />
+		<label for=""><strong>Cantidad de Ecuaciones:</strong></label>
+		<div>
+			<button class="btn btn-sm btn-danger" id="menos">Menos</button>
+			<input id="n" type="number" value="0">
+			<button  class="btn btn-sm btn-success" id="mas">Más</button>
+		</div>
+		<br />
+		<div class="table-container">
+			<div class="row">
+				<div class="col-md-9">
+					<table id="matriz" class="table table-sm"></table>
+				</div>
+				<div class="col-md-3">
+					<table id="vector" class="table table-sm"></table>
+				</div>
+			</div>
+		</div>
+		<br />
+		<label for="">Selecciona el Algoritmo:</label>
+		<select name="" id="algoritmo">
+			<option>Gauss-Seidell</option>
+			<option>Gauss-Jordan</option>
+		</select> <br />
+		<button id="solve" class="btn btn-lg btn-primary">Solucionar!</button>
+		<hr />
+		<br />
+		<div class="res-container">
+			<table id="resultados" class="table table-sm"></table>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			function loadTable() {
+				var n = $("#n").val();
+				var str = "";
+				var str2 = "";
+				for(var i = 0; i < n; i++) {
+					str += "<tr>";
+					str2 += "<tr>";
+					str2 += '<td class="res" contenteditable="true"><strong>'+Math.floor(Math.random() * 50)+'</strong></td>';
+					for(var j = 0; j < n; j++) {
+						str += '<td contenteditable="true">'+Math.floor(Math.random() * 10)+'</td>';
+					}
+					str += "</tr>";
+					str2 += "</tr>";
+				}
+				$("#matriz").html(str);
+				$("#vector").html(str2);
+			}
+			$("#menos").click(function(){
+				if(Number($("#n").val()) <= 0) {
+					$("#n").val(0);
+				}
+				else {
+					$("#n").val(Number($("#n").val()) - 1);
+				}
+				loadTable();
+			});
+			$("#mas").click(function(){
+				if(Number($("#n").val()) >= 10) {
+					$("#n").val(10);
+				}
+				else {
+					$("#n").val(Number($("#n").val()) + 1);
+				}
+				loadTable();
+			});
+			$("#solve").click(function() {
+				var n = $("#n").val();
+				var str = "";
+				for(var i = 0; i < n; i++) {
+					str += '<tr>';
+					str += '<th> X' + (i+1) + ' = ' + (Math.random() * 15) + '</th>';
+					str += '</tr>';
+				}
+				$("#resultados").html(str);
+			});
+		});
+	</script>
+</body>
+</html>
